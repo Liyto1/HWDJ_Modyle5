@@ -10,16 +10,12 @@ public class DatabasePopulateService {
         Connection connection = database.getConnection();
 
         try {
-            // Вставка даних у таблицю worker
             insertWorkerData(connection);
 
-            // Вставка даних у таблицю client
             insertClientData(connection);
 
-            // Вставка даних у таблицю project
             insertProjectData(connection);
 
-            // Вставка даних у таблицю project_worker
             insertProjectWorkerData(connection);
 
             System.out.println("Базу даних успішно заповнено.");
@@ -31,36 +27,28 @@ public class DatabasePopulateService {
     private static void insertWorkerData(Connection connection) throws SQLException {
         String insertWorkerSQL = "INSERT INTO worker (NAME, BIRTHDAY, LEVEL, SALARY) VALUES (?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertWorkerSQL)) {
-            // Вставка даних для worker
             insertWorkerRow(preparedStatement, "Forrest Gump", "1990-05-15", "Trainee", 800);
-            // Додайте інші записи worker тут
         }
     }
 
     private static void insertClientData(Connection connection) throws SQLException {
         String insertClientSQL = "INSERT INTO client (NAME) VALUES (?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertClientSQL)) {
-            // Вставка даних для client
             insertClientRow(preparedStatement, "Client A");
-            // Додайте інші записи client тут
         }
     }
 
     private static void insertProjectData(Connection connection) throws SQLException {
         String insertProjectSQL = "INSERT INTO project (CLIENT_ID, START_DATE, FINISH_DATE) VALUES (?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertProjectSQL)) {
-            // Вставка даних для project
             insertProjectRow(preparedStatement, 1, "2023-01-01", "2023-03-31");
-            // Додайте інші записи project тут
         }
     }
 
     private static void insertProjectWorkerData(Connection connection) throws SQLException {
         String insertProjectWorkerSQL = "INSERT INTO project_worker (PROJECT_ID, WORKER_ID) VALUES (?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertProjectWorkerSQL)) {
-            // Вставка даних для project_worker
             insertProjectWorkerRow(preparedStatement, 1, 1);
-            // Додайте інші записи project_worker тут
         }
     }
 
