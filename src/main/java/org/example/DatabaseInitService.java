@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 public class DatabaseInitService {
@@ -28,9 +27,7 @@ public class DatabaseInitService {
                 query.append(line);
 
                 if (line.trim().endsWith(";")) {
-                    try (PreparedStatement preparedStatement = connection.prepareStatement(query.toString())) {
-                        preparedStatement.execute();
-                    }
+                    statement.execute(query.toString());
                     query.setLength(0);
                 }
             }

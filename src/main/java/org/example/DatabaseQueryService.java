@@ -8,7 +8,10 @@ import org.example.entities.YoungestEldestWorkersCount;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,8 +55,9 @@ public class DatabaseQueryService {
         String sqlFilePath = "sql/find_max_projects_client.sql";
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(readSqlFile(sqlFilePath));
-            ResultSet resultSet = preparedStatement.executeQuery();
+            Statement statement = connection.createStatement();
+            String sqlQuery = readSqlFile(sqlFilePath);
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             while (resultSet.next()) {
                 String name = resultSet.getString("Client_Name");
@@ -63,7 +67,7 @@ public class DatabaseQueryService {
             }
 
             resultSet.close();
-            preparedStatement.close();
+            statement.close();
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
@@ -77,8 +81,9 @@ public class DatabaseQueryService {
         String sqlFilePath = "sql/find_longest_project.sql";
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(readSqlFile(sqlFilePath));
-            ResultSet resultSet = preparedStatement.executeQuery();
+            Statement statement = connection.createStatement();
+            String sqlQuery = readSqlFile(sqlFilePath);
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("ID");
@@ -89,7 +94,7 @@ public class DatabaseQueryService {
             }
 
             resultSet.close();
-            preparedStatement.close();
+            statement.close();
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
@@ -103,8 +108,9 @@ public class DatabaseQueryService {
         String sqlFilePath = "sql/find_max_salary_worker.sql";
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(readSqlFile(sqlFilePath));
-            ResultSet resultSet = preparedStatement.executeQuery();
+            Statement statement = connection.createStatement();
+            String sqlQuery = readSqlFile(sqlFilePath);
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("ID");
@@ -115,7 +121,7 @@ public class DatabaseQueryService {
             }
 
             resultSet.close();
-            preparedStatement.close();
+            statement.close();
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
@@ -129,8 +135,9 @@ public class DatabaseQueryService {
         String sqlFilePath = "sql/find_youngest_eldest_workers.sql";
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(readSqlFile(sqlFilePath));
-            ResultSet resultSet = preparedStatement.executeQuery();
+            Statement statement = connection.createStatement();
+            String sqlQuery = readSqlFile(sqlFilePath);
+            ResultSet resultSet = statement.executeQuery(sqlQuery);
 
             while (resultSet.next()) {
                 String type = resultSet.getString("TYPE");
@@ -141,7 +148,7 @@ public class DatabaseQueryService {
             }
 
             resultSet.close();
-            preparedStatement.close();
+            statement.close();
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
